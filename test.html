@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>HTML5元素测试</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+		<script type="text/javascript" src="jquery-1.11.3.js"></script>
+		<style type="text/css">
+			body{
+				min-width:900px;
+				max-width:80%;
+				margin:0px auto;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>h1样式1</h1>
+		<h1 id="ss">h1样式2</h1>
+		<h1>h1样式3</h1>
+		<h2>h2样式</h2>
+		<h3>h3样式</h3>
+		<h4>h4样式</h4>
+		<h5>h5样式</h5>
+		<h6>h6样式</h6>
+		<input type='checkbox' name='chkName' value='610101111'>城关区 
+		<input type='checkbox' name='chkName' value='610101112'>城关区1 
+		<input type='checkbox' name='chkName' value='610101113'>城关区2 
+		<input type='checkbox' name='chkName' value='610101114'>城关区3 
+		<input type='checkbox' name='chkName' value='610101115'>城关区4
+		<input type="button" id="clc" value="Click Me">
+		<input type="button" id="all" value="All Select">
+		<input type="button" id="reserve" value="Reserve">
+	<script type="text/javascript">
+		//$.holdReady(true);
+		$(document).ready(function(){
+			var target = $("h1");
+			target.each(function(a){this.innerHTML+='<span style="color:red">'+a+'</span>';});
+			//$("#clc").click(function(){alert($("input[type='checkbox'][name='chkName']:checked").map(function(){return $(this).val();}).get());});
+			//$("#all").click(function(){$("input[type=checkbox]").prop("checked",true)});
+			//$("#reserve").click(function(){$("input[type=checkbox]").map(function(){var obj=$(this);obj.prop("checked",!obj.prop("checked"))})});
+			$.fn.extend({
+				checked:function(){return $(this).filter(":checked");},
+				value:function(){return $(this).map(function(){return $(this).val();}).get()},
+				selectAll:function(){$(this).prop("checked",true)},
+				reserve:function(){$(this).each(function(){var obj=$(this);obj.prop("checked",!obj.prop("checked"))})}
+			});
+			$("#clc").click(function(){alert($("input[type='checkbox']").checked().value());});
+			$("#all").click(function(){$("input[type=checkbox]").selectAll();});
+			$("#reserve").click(function(){$("input[type=checkbox]").reserve();});
+		});
+		
+		//window.setTimeout("$.holdReady(false)",3000);
+	</script>
+	</body>
+</html>
